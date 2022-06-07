@@ -14,5 +14,10 @@ class Reservation extends Model
         'lname',
         'email',
         'phone-number',
+        'event_id'
     ];
+
+    public function event() {
+        return $this->belongsTo(Event::class);
+    }
 }

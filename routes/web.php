@@ -22,4 +22,7 @@ Route::get('/reservation', 'ReservationsController@create')->name('reservation.c
 
 Route::post('/reservation', 'ReservationsController@store')->name('reservation.store');
 
-Route::get('/admin', 'ManagementController@index');
+Route::get('/events', 'EventsController@index')->name('event.index');
+Route::get('/events/create', 'EventsController@create')->name('event.create');
+Route::post('/events/create', 'EventsController@store')->name('event.store');
+Route::get('/event/{event}', 'EventsController@show')->name('event.show');

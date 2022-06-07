@@ -41,9 +41,9 @@
     }
 </style>
 
-            <div class="homepage-content">
-                <h1 class="homepage-title">Welcome to MWD</h1>
-                <h4 class="homepage-text">We manage memorable events in Lebanon</h4>
-                <a class="btn btn-primary" href="{{ route('reservation.create') }}">Upcoming Events</a>
-            </div>
+<div class="homepage-content">
+    <h1 class="homepage-title">Welcome to MWD</h1>
+    <h4 class="homepage-text">We manage memorable events in Lebanon</h4>
+    <a class="btn btn-primary" href="{{ route('reservation.create') }}">Upcoming Events</a>
+</div>
 @endsection

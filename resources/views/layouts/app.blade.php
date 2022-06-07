@@ -14,7 +14,7 @@
 
 <style>
     .homepage {
-        background: url("images/mawad-icon4.jpg") no-repeat center fixed;
+        background: url("/images/mawad-icon4.jpg") no-repeat center fixed;
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
