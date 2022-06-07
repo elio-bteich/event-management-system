@@ -19,7 +19,6 @@ Route::get('/', function () {
 });
 
 Route::get('/reservation', 'ReservationsController@create')->name('reservation.create');
-
 Route::post('/reservation', 'ReservationsController@store')->name('reservation.store');
 
 Route::get('/events', 'EventsController@index')->name('event.index');

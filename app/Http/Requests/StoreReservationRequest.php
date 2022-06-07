@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\EmailCanReserve;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreReservationRequest extends FormRequest
@@ -26,12 +27,14 @@ class StoreReservationRequest extends FormRequest
     public function rules()
     {
         return [
-            'fname' => 'required|min:3|string',
-            'lname' => 'required|min:3|string',
-            'email' => 'required|email|unique:reservations',
-            'phone_number' => 'required|unique:reservations,phone-number'
+            'fname' => ['required','min:3','string'],
+            'lname' => ['required','min:3','string'],
+            'email' => ['required', 'email'],
+            'phone_number' => ['required']
         ];
     }
+
+    // create a validation rule to verify that the person who is sending the reservation request never reserved for this event before
 
     public function messages() {
         return [

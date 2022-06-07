@@ -54,18 +54,6 @@
                             <td>{{ $reservation->phone_number }}</td>
                         </tr>
                     @endforeach
-                    <tr>
-                        <td>Mary</td>
-                        <td>Moe</td>
-                        <td>mary@example.com</td>
-                        <td>0649524368</td>
-                    </tr>
-                    <tr>
-                        <td>July</td>
-                        <td>Dooley</td>
-                        <td>july@example.com</td>
-                        <td>0649524368</td>
-                    </tr>
                 </tbody>
             </table>
         </div>

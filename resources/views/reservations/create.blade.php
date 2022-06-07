@@ -86,11 +86,17 @@
                 {{Session::get('success')}}
             </div>
         @endif
+            @if(Session::has('error'))
+                <div class="alert alert-danger mb-0 mt-2">
+                    {{Session::get('error')}}
+                </div>
+            @endif
         <div class="row h-100">
             <div class="col-6 h-100">
                 <form action="{{ route('reservation.store') }}" method="post">
                     @csrf
                     <h2 class="reservation-form-title">Reservation</h2>
+                    <input type="hidden" name="event_id" value="{{ $event->id }}">
                     <div class="input-div">
                         <input type="text" class="@error('fname') is-invalid @enderror" name="fname" id="fname" placeholder="First Name" required>
                         @error('fname')
@@ -127,7 +133,7 @@
                 </form>
             </div>
             <div class="col-6 h-100">
-                <img class="flyer" src="{{url('images/mawad-flyer.jpg')}}">
+                <img class="flyer" src="/uploads/event_flyers/{{ $event->flyer_image }}">
             </div>
         </div>
     </div>

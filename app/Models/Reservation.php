@@ -13,7 +13,7 @@ class Reservation extends Model
         'fname',
         'lname',
         'email',
-        'phone-number',
+        'phone_number',
         'event_id'
     ];
 
