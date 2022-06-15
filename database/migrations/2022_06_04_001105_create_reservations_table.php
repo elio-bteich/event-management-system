@@ -20,7 +20,7 @@ class CreateReservationsTable extends Migration
             $table->string("email")->unique();
             $table->string("phone_number")->unique();
             $table->foreignId('event_id')->references('id')->on('events');
-            $table->foreignId("acceptance_status_id")->default(1)->references('id')->on('acceptance_statuses');
+            $table->foreignId("acceptance_status_id")->default(2)->references('id')->on('acceptance_statuses');
             $table->timestamps();
         });
     }

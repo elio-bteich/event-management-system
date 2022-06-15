@@ -44,6 +44,6 @@
 <div class="homepage-content">
     <h1 class="homepage-title">Welcome to MWD</h1>
     <h4 class="homepage-text">We manage memorable events in Lebanon</h4>
-    <a class="btn btn-primary" href="{{ route('reservation.create') }}">Upcoming Event</a>
+    <a class="btn btn-primary" href="{{ route('reservation.index') }}">Upcoming Event</a>
 </div>
 @endsection

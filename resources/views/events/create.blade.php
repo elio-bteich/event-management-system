@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.events')
 
 @section('content')
 
@@ -8,7 +8,7 @@
         @if(session('success'))
             <h6 class="alert alert-success">{{ session('success') }}</h6>
         @endif
-        <div class="row">
+        <div class="row mt-5">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">

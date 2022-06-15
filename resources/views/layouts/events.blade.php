@@ -5,7 +5,7 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href='/app/node_modules/intl-tel-input/build/css/intlTelInput.css' rel="stylesheet">
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
@@ -14,7 +14,7 @@
 
 <style>
     .homepage {
-        background: url("/images/mawad-icon4.jpg") no-repeat center fixed;
+        background: none;
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
@@ -22,16 +22,19 @@
         height: 100vh;
         width: 100vw;
     }
+
     .homepage-container {
         padding: 10px 50px;
         height: 100%;
     }
+
     .homepage-navbar {
         position: relative;
         height: 50px;
-        color: rgba(255, 255, 255, 0.8);
-        border-bottom: solid 1px rgba(255, 255, 255, 0.2);
+        color: black;
+        border-bottom: solid 1px black;
     }
+
     .homepage-navbar-title {
         position: relative;
         top: 50%;
