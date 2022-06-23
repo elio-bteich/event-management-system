@@ -19,22 +19,25 @@ Route::get('/', function () {
 });
 
 Route::get('/reservation', 'ReservationsController@index')->name('reservation.index');
-Route::post('/reservation', 'ReservationsController@store')->name('reservation.store');
-Route::get('/reservation/event/{event}', 'ReservationsController@create')->name('reservation.create');
+Route::post('/reservation', 'ReservationsController@store')->middleware('auth')->name('reservation.store');
+Route::get('/reservation/event/{event}', 'ReservationsController@create')->middleware('auth')->name('reservation.create');
 
 Route::get('/reservation/sendEmailVerification/{email}', 'ReservationsController@send_email_verification');
 
 Route::get('/events', 'EventsController@index')->name('event.index');
 Route::get('/events/create', 'EventsController@create')->name('event.create');
 Route::post('/events/create', 'EventsController@store')->name('event.store');
-Route::get('/event/{event}', 'EventsController@show')->name('event.show');
+Route::get('/events/{event}', 'EventsController@show')->name('event.show');
 
 //ajax
-Route::get('/event/{event}/requests', 'EventsController@get_requests');
-Route::get('/event/{event}/reservations', 'EventsController@get_reservations');
+Route::get('/events/{event}/requests', 'EventsController@get_requests');
+Route::get('/events/{event}/reservations', 'EventsController@get_reservations');
 
-Route::post('/event/{event}/request/{reservation}', 'ReservationsController@update_acceptance_status');
+Route::post('/events/{event}/request/{reservation}/accept', 'ReservationsController@accept_reservation_request');
+Route::post('/events/{event}/request/{reservation}/decline', 'ReservationsController@decline_reservation_request');
+
+// TODO
+Route::get('/events/{event}/edit', 'EventsController@edit')->name('event.edit');
+Route::delete('/events/{event}', 'EventsController@destroy')->name('event.destroy');
 
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

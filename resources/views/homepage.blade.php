@@ -37,13 +37,21 @@
     }
 
     .homepage-text {
+        font-size: 24px;
         margin-bottom: 30px;
+    }
+    .main-container {
+        background: url("/images/mawad-icon4.jpg") no-repeat center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
     }
 </style>
 
 <div class="homepage-content">
     <h1 class="homepage-title">Welcome to MWD</h1>
     <h4 class="homepage-text">We manage memorable events in Lebanon</h4>
-    <a class="btn btn-primary" href="{{ route('reservation.index') }}">Upcoming Event</a>
+    <a class="btn btn-primary" href="{{ route('reservation.index') }}">Upcoming Events</a>
 </div>
 @endsection

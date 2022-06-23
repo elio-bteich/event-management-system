@@ -1,8 +1,6 @@
-@extends('layouts.events')
+@extends('layouts.app')
 
 @section('content')
-
-    <style></style>
 
     <div class="container">
         <div class="row mt-5">
@@ -14,11 +12,19 @@
                         </h4>
                     </div>
                     <div class="card-body">
-                        <ul>
-                        @foreach($events as $event)
-                                <li><a href="event/{{ $event->id }}">{{ $event->description }}</a></li>
-                        @endforeach
-                        </ul>
+                        <table class="w-100">
+                            <tbody>
+                            @foreach($events as $event)
+                                <tr>
+                                    <td width="50%" style="padding-bottom: 10px"><a href="events/{{ $event->id }}">{{ $event->description }}</a></td>
+                                    <td width="50%" style="padding-bottom: 10px">
+                                        <a class="btn btn-primary" href="{{ route('event.edit', ['event'=>$event]) }}">Edit</a>
+                                        <a class="btn btn-danger" href="{{ route('event.destroy', ['event'=>$event]) }}">Delete</a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

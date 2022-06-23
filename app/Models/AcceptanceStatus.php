@@ -9,8 +9,12 @@ class AcceptanceStatus extends Model
 {
     use HasFactory;
 
-    // id 0 => rejected
-    // id 1 => on hold (by default)
-    // id 2 => accepted
+    // id 1 => rejected
+    // id 2 => on hold (by default)
+    // id 3 => accepted
+
+    public function reservations() {
+        return $this->hasMany(Reservation::class);
+    }
 
 }

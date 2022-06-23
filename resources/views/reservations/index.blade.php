@@ -3,9 +3,6 @@
 @section("content")
 
     <style>
-        .homepage-container {
-            background: none;
-        }
         .row {
             height: 90%;
             margin-bottom: 200px;
@@ -16,13 +13,12 @@
         }
         .events-container {
             position: relative;
-            top: 50px;
-            height: calc(100% - 50px);
+            height: calc(100% - 77px);
             margin: 0 100px;
             padding: 50px 100px 200px 100px;
         }
         .event-flyer {
-            width: 90%;
+            width: 100%;
             height: 100%;
         }
         .event-flyer:hover {
@@ -40,7 +36,7 @@
     </style>
 
     <div class="events-container">
-        <h1 class="title text-center">Events</h1>
+        <h1 class="title text-center">Upcoming Events</h1>
             <div class="row">
                 @foreach($events as $event)
                 <div class="col-4">

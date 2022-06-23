@@ -1,19 +1,10 @@
-@extends('layouts.events')
+@extends('layouts.app')
 
 @section('content')
 
     <style>
-        .homepage {
-            background: none;
-        }
-        .homepage-navbar {
-            border-bottom-color: black;
-        }
-        .homepage-navbar-title {
-            color: black;
-        }
         .row {
-            height: calc(100% - 50px);
+            height: calc(100% - 80px);
         }
         .col-4, .col-8{
             height: 100%;
@@ -26,7 +17,7 @@
 
         .col-8 {
             height: 95%;
-            background: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.9);
         }
         .scrollit {
             overflow-y: scroll;
@@ -34,12 +25,15 @@
             -ms-overflow-style: none;  /* IE and Edge */
             scrollbar-width: none;  /* Firefox */
         }
+
         .scrollit::-webkit-scrollbar {
             display: none;
         }
+
         .reservation-bar {
             height: 50px;
         }
+
         .reservation-bar .row {
             width: 100%;
             height: 100%;
@@ -47,16 +41,24 @@
         }
         .reservation-bar .col-6 {
             border: black solid 1px;
-            background: #f5f5f5;
+            background: rgb(176, 176, 176);
             height: 100%;
             text-align: center;
         }
+
         .reservation-bar .col-6 h5{
             top: 50%;
             transform: translateY(50%);
         }
+
         .reservation-bar .col-6:hover {
             cursor: pointer;
+        }
+        td {
+            padding: 8px;
+        }
+        #reservations-tab {
+            background-color: white;
         }
     </style>
 
@@ -64,14 +66,14 @@
         <div class="col-4">
             <img class="flyer_image" src="/uploads/event_flyers/{{ $event->flyer_image }}" alt="Flyer Image">
         </div>
-        <div class="col-8">
+        <div class="col-8" style="padding: 0">
             <div class="reservation-bar">
                 <div class="row">
-                    <div class="col-6" id="reservations-tab" style="background: rgba(0, 0, 0, 0.38);">
-                        <h5>Reservations ({{$reservation_count}})</h5>
+                    <div class="col-6" id="reservations-tab">
+                        <h5 id="reservations-tab-content">Reservations (<span id="reservations-count">{{$reservation_count}}</span>)</h5>
                     </div>
                     <div class="col-6" id="requests-tab">
-                        <h5>Requests ({{$requests_count}})</h5>
+                        <h5 id="requests-tab-content">Requests (<span id="requests-count">{{$requests_count}}</span>)</h5>
                     </div>
                 </div>
             </div>
@@ -79,24 +81,26 @@
                 <table class="table">
                     <thead style="background: rgba(0,0,0,0.8); color: white">
                     <tr>
-                        <th width="20%">Firstname</th>
-                        <th width="20%">Lastname</th>
+                        <th width="15%">Firstname</th>
+                        <th width="15%">Lastname</th>
                         <th width="30%">Email</th>
-                        <th width="30%">PhoneNumber</th>
+                        <th width="25%">PhoneNumber</th>
+                        <th width="15%">Option</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
-                        <td colspan="4">
+                        <td colspan="5" style="padding: 8px 0">
                             <div class="scrollit">
-                                <table style="font-family: 'Nunito', sans-serif">
+                                <table style="font-family: 'Nunito', sans-serif; width: 100%">
                                     @foreach($event->reservations as $reservation)
                                         @if($reservation->acceptance_status_id == 3)
                                             <tr>
-                                                <td width="20%">{{ $reservation->fname }}</td>
-                                                <td width="20%">{{ $reservation->lname }}</td>
-                                                <td width="30%">{{ $reservation->email }}</td>
-                                                <td width="30%">{{ $reservation->phone_number }}</td>
+                                                <td width="15%">{{ $reservation->user->fname }}</td>
+                                                <td width="15%">{{ $reservation->user->lname }}</td>
+                                                <td width="30%">{{ $reservation->user->email }}</td>
+                                                <td width="25%">{{ $reservation->user->phone_number }}</td>
+                                                <td width="15%">{{ $reservation->reservation_option->description }}</td>
                                             </tr>
                                         @endif
                                     @endforeach
@@ -114,22 +118,34 @@
     <script>
         $('#reservations-tab').click(function (){
             $.ajax({
-                url: '/event/{{$event->id}}/reservations',
+                url: '/events/{{$event->id}}/reservations',
                 type: 'GET',
                 success: function (data) {
                     $('#reservations-data').html(data)
+                    activateReservationsTab()
                 }
             })
         })
 
         $('#requests-tab').click(function(){
             $.ajax({
-                url: '/event/{{$event->id}}/requests',
+                url: '/events/{{$event->id}}/requests',
                 type: 'GET',
                 success: function (data) {
                     $('#reservations-data').html(data)
+                    activateRequestsTab()
                 }
             })
         })
+
+        function activateReservationsTab() {
+            $('#reservations-tab').css('background-color', 'white')
+            $('#requests-tab').css('background-color', 'rgb(176, 176, 176)')
+        }
+
+        function activateRequestsTab() {
+            $('#reservations-tab').css('background-color', 'rgb(176, 176, 176)')
+            $('#requests-tab').css('background-color', 'white')
+        }
     </script>
 @endsection

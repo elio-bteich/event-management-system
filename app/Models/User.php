@@ -4,21 +4,21 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Event extends Model
+class User extends Authenticatable
 {
     use HasFactory;
 
     protected $fillable = [
-        'description',
-        'flyer_image'
+        'fname',
+        'lname',
+        'email',
+        'phone_number',
+        'password'
     ];
 
     public function reservations() {
         return $this->hasMany(Reservation::class);
-    }
-
-    public function reservation_options() {
-        return $this->hasMany(ReservationOption::class);
     }
 }

@@ -6,7 +6,9 @@ use App\Http\Requests\StoreReservationRequest;
 use App\Mail\AuthenticationEmail;
 use App\Models\Event;
 use App\Models\Reservation;
+use App\Models\ReservationOption;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 class ReservationsController extends Controller
@@ -20,33 +22,25 @@ class ReservationsController extends Controller
         return view('reservations.create', compact('event'));
     }
 
-    public function store(StoreReservationRequest $request) {
-        $canReserve = !Reservation::where('event_id', $request['event_id'])->when($request, function($query, $request) {
-            $query->where('email', $request->email)
-                ->orWhere('phone_number', $request->phone_number);
-        })->exists();
-        if ($canReserve) {
-            $reservation = new Reservation;
-            $reservation->fname = $request['fname'];
-            $reservation->lname = $request['lname'];
-            $reservation->email = $request['email'];
-            $reservation->phone_number = $request['phone_number'];
-            $reservation->event_id = $request['event_id'];
-            $reservation->save();
-            return back()->with('success', 'reservation request has been sent');
-        }
-        return back()->with('error', 'you have already sent a reservation request to this event');
+    public function store(Request $request) {
+        $reservation = new Reservation;
+        $reservation->user_id = $request->user()->id;
+        $reservation->reservation_option_id = $request['reservation_option_id'];
+        $reservation->event_id = $request['event_id'];
+        $reservation->save();
+        return back()->with('success', 'reservation request has been sent');
     }
 
-    public function update_acceptance_status(Event $event, Reservation $reservation, Request $request) {
-        if ($request['action'] == 'Decline') {
-            $reservation->acceptance_status_id = 1;
-            $reservation->save();
-            return back()->with('acceptance_status_update', 'reservation request has been declined');
-        }
+    public function accept_reservation_request(Event $event, Reservation $reservation) {
         $reservation->acceptance_status_id = 3;
         $reservation->save();
-        return back()->with('acceptance_status_update', 'reservation request has been accepted successfully');
+        return response()->json(['acceptance_status_update' => 'reservation request has been accepted successfully']);
+    }
+
+    public function decline_reservation_request(Event $event, Reservation $reservation) {
+        $reservation->acceptance_status_id = 1;
+        $reservation->save();
+        return response()->json(['acceptance_status_update' => 'reservation request has been declined']);
     }
 
     public function send_email_verification($email_address) {

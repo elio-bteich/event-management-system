@@ -29,6 +29,14 @@ class EventsController extends Controller
             $event->flyer_image = $filename;
         }
         $event->save();
+        $options_count = count($request['options_descriptions']);
+        for($i=0;$i<$options_count;$i++) {
+            if ($request['options_descriptions'][$i] != null && $request['options_prices'][$i] != null){
+                $event->reservation_options()->create(
+                    ['description' => $request['options_descriptions'][$i], 'price' => $request['options_prices'][$i]]
+                );
+            }
+        }
         return back()->with('success', 'Event has been successfully created');
     }
 
