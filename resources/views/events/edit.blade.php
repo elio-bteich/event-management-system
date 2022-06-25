@@ -10,36 +10,37 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Add Event
+                        <h4>Edit Event
                             <a href="{{ route('event.index') }}" class="btn btn-primary float-end">Back</a>
                         </h4>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('event.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('event.update', ['event' => $event]) }}" method="POST" enctype="multipart/form-data">
+                            @method('patch')
                             @csrf
                             <div class="form-group mb-3">
                                 <label for="description">Description</label>
-                                <input type="text" id="description" name="description" class="form-control" required>
+                                <input type="text" id="description" name="description" class="form-control" value="{{$event->description}}" required>
                             </div>
                             <div class="form-group mb-3" id="options-container">
                                 <label for="flyer">Options</label>
-                                <div class="row mb-3" style="--bs-gutter-x: 0; margin: 0;">
-                                    <div class="col-4" style="padding-right: 20px;">
-                                        <input type="text" id="option_description" name="options_descriptions[]" placeholder="Description" class="form-control">
+                                @foreach($event->reservation_options as $reservation_option)
+                                    <div class="row mb-3" style="--bs-gutter-x: 0; margin: 0;">
+                                        <input type="hidden" name="old_options_id[]" value="{{ $reservation_option->id }}">
+                                        <div class="col-5" style="padding-right: 20px;">
+                                            <input type="text" id="option_description" name="old_options_descriptions[]" value="{{ $reservation_option->description }}" placeholder="Description" class="form-control" required>
+                                        </div>
+                                        <div class="col-3" style="padding-left: 20px;">
+                                            <input type="text" name="old_options_prices[]" value="{{ $reservation_option->price }}" placeholder="Price" class="form-control" required>
+                                        </div>
+                                        <div class="col-2" style="padding-left: 40px;">
+                                            <input type="number" name="old_min_capacities[]" value="{{ $reservation_option->min_capacity }}" placeholder="Min Cap" class="form-control">
+                                        </div>
+                                        <div class="col-2" style="padding-left: 40px;">
+                                            <input type="number" name="old_max_capacities[]" value="{{ $reservation_option->max_capacity }}" placeholder="Max Cap" class="form-control">
+                                        </div>
                                     </div>
-                                    <div class="col-3" style="padding-left: 20px;">
-                                        <input type="text" name="options_prices[]" placeholder="Price" class="form-control">
-                                    </div>
-                                    <div class="col-2" style="padding-left: 40px;">
-                                        <input type="number" name="min_capacities[]" placeholder="Min Cap" class="form-control">
-                                    </div>
-                                    <div class="col-2" style="padding-left: 40px;">
-                                        <input type="number" name="max_capacities[]" placeholder="Max Cap" class="form-control">
-                                    </div>
-                                    <div class="col-1" style="padding-left: 20px; text-align: right">
-                                        <button class="btn btn-danger delete-btn"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                             <div class="row justify-content-end" style="--bs-gutter-x: 0; margin: 0;">
                                 <div class="col-3">
@@ -48,10 +49,10 @@
                             </div>
                             <div class="form-group mb-3">
                                 <label for="flyer">Flyer</label>
-                                <input type="file" id="flyer" name="flyer_image" class="form-control">
+                                <input type="file" id="flyer" name="flyer_image" class="form-control" value="{{$event->flyer_image}}">
                             </div>
                             <div class="form-group mb-3">
-                                <button type="submit" class="btn btn-primary">Add</button>
+                                <button type="submit" class="btn btn-primary">Save</button>
                             </div>
                         </form>
                     </div>
@@ -59,22 +60,21 @@
             </div>
         </div>
     </div>
-
     <script>
         $('#add-option-btn').on('click', function(e){
             e.preventDefault()
             $('#options-container').append(`<div class="row mb-3" style="--bs-gutter-x: 0; margin: 0;">
                                     <div class="col-4" style="padding-right: 20px;">
-                                        <input type="text" id="option_description" name="options_descriptions[]" placeholder="Description" class="form-control">
+                                        <input type="text" id="option_description" name="new_options_descriptions[]" placeholder="Description" class="form-control">
                                     </div>
                                     <div class="col-3" style="padding-left: 20px;">
-                                        <input type="text" name="options_prices[]" placeholder="Price" class="form-control">
+                                        <input type="text" name="new_options_prices[]" placeholder="Price" class="form-control">
                                     </div>
                                     <div class="col-2" style="padding-left: 40px;">
-                                        <input type="number" name="min_capacities[]" placeholder="Min Cap" class="form-control">
+                                        <input type="number" name="new_min_capacities[]" placeholder="Min Cap" class="form-control">
                                     </div>
                                     <div class="col-2" style="padding-left: 40px;">
-                                        <input type="number" name="max_capacities[]" placeholder="Max Cap" class="form-control">
+                                        <input type="number" name="new_max_capacities[]" placeholder="Max Cap" class="form-control">
                                     </div>
                                     <div class="col-1" style="padding-left: 20px; text-align: right">
                                         <button class="btn btn-danger delete-btn"><i class="fa fa-trash" aria-hidden="true"></i></button>

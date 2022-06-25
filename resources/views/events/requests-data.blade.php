@@ -46,7 +46,7 @@
             url: $($(this)[0].parentElement).attr('action') + '/accept',
             method: 'POST',
             success: function (data) {
-                $($(e.target).closest('tr')[0]).hide()
+                $($(e.target).closest('tr')[0]).remove()
                 increaseReservationsCount()
                 decreaseRequestsCount()
             }
@@ -61,7 +61,7 @@
             url: $($(this)[0].parentElement).attr('action') + '/decline',
             method: 'POST',
             success: function (data) {
-                $($(e.target).closest('tr')[0]).hide()
+                $($(e.target).closest('tr')[0]).remove()
                 decreaseRequestsCount()
             }
         })

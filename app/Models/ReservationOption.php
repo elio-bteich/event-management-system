@@ -11,7 +11,9 @@ class ReservationOption extends Model
 
     protected $fillable = [
         'description',
-        'price'
+        'price',
+        'min_capacity',
+        'max_capacity'
     ];
 
     public function reservations() {
