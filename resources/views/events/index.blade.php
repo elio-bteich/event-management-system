@@ -19,7 +19,11 @@
                                     <td width="50%" style="padding-bottom: 10px"><a href="events/{{ $event->id }}">{{ $event->description }}</a></td>
                                     <td width="50%" style="padding-bottom: 10px">
                                         <a class="btn btn-primary" href="{{ route('event.edit', ['event'=>$event]) }}">Edit</a>
-                                        <a class="btn btn-danger" href="{{ route('event.destroy', ['event'=>$event]) }}">Delete</a>
+                                        <form style="display: inline" action="{{ route('event.destroy', ['event'=>$event]) }}" method="post">
+                                            @method('delete')
+                                            @csrf
+                                            <input class="btn btn-danger" type="submit" value="Delete">
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach

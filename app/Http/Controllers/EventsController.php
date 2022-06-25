@@ -49,7 +49,6 @@ class EventsController extends Controller
 
     public function update(Event $event, Request $request)
     {
-
         // TODO: input validations
         $event->description = $request['description'];
         if ($request->hasFile('flyer_image')) {
@@ -111,6 +110,14 @@ class EventsController extends Controller
     public function edit(Event $event)
     {
         return view('events.edit', compact('event'));
+    }
+
+    public function destroy(Event $event) {
+        $event->reservations()->delete();
+        $event->reservation_options()->delete();
+        $this->removeImage('event_flyers/'.$event->flyer_image);
+        $event->delete();
+        return back();
     }
 
     public function get_requests($event)
