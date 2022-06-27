@@ -19,7 +19,6 @@ class UserFactory extends Factory
             'fname' => 'Elio',
             'lname' => 'Bteich',
             'email' => 'eliobteich115@gmail.com',
-            'phone_number' => '0649524368',
             'email_verified_at' => null,
             'password' => Hash::make('lalipos12'),
             'remember_token' => null,

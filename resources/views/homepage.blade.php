@@ -48,7 +48,11 @@
         background-size: cover;
     }
 </style>
-
+@if(Session::has('registration-success'))
+    <div class="alert alert-success mt-3 text-center">
+        {{Session::pull('registration-success')}}
+    </div>
+@endif
 <div class="homepage-content">
     <h1 class="homepage-title">Welcome to MWD</h1>
     <h4 class="homepage-text">We manage memorable events in Lebanon</h4>

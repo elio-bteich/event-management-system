@@ -10,6 +10,7 @@ use App\Models\ReservationOption;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use PhpParser\Node\Expr\Array_;
 
 class ReservationsController extends Controller
 {
@@ -19,7 +20,18 @@ class ReservationsController extends Controller
     }
 
     public function create(Event $event) {
-        return view('reservations.create', compact('event'));
+        $event_reservations = $event->reservation_options;
+        $capacities_formatted = array();
+        foreach ($event_reservations as $event_reservation) {
+            $result = '';
+            if ($event_reservation->min_capacity >= 1 && $event_reservation->max_capacity > 1) {
+                $result = '('. $event_reservation->min_capacity . '-' . $event_reservation->max_capacity.' people)';
+            }else if ($event_reservation->min_capacity == 1 && $event_reservation->max_capacity == 1) {
+                $result = '(1 person)';
+            }
+            array_push($capacities_formatted, $result);
+        }
+        return view('reservations.create', compact('event', 'capacities_formatted'));
     }
 
     public function store(Request $request) {
@@ -41,12 +53,5 @@ class ReservationsController extends Controller
         $reservation->acceptance_status_id = 1;
         $reservation->save();
         return response()->json(['acceptance_status_update' => 'reservation request has been declined']);
-    }
-
-    public function send_email_verification($email_address) {
-        $verification_code = rand(100000, 999999);
-        Mail::to($email_address)->send(new AuthenticationEmail($verification_code));
-        $verification_code = hash('sha256', $verification_code);
-        return response()->json($verification_code);
     }
 }

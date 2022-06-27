@@ -37,12 +37,16 @@
 
     <div class="events-container">
         <h1 class="title text-center">Upcoming Events</h1>
-            <div class="row">
-                @foreach($events as $event)
-                <div class="col-4">
-                    <a href="reservation/event/{{$event->id}}"><img class="event-flyer" src="/uploads/event_flyers/{{ $event->flyer_image }}"></a>
-                </div>
-                @endforeach
+            <div class="row align-items-center">
+                @if(count($events)>0)
+                    @foreach($events as $event)
+                        <div class="col-4">
+                            <a href="reservation/event/{{$event->id}}"><img class="event-flyer" src="/uploads/event_flyers/{{ $event->flyer_image }}"></a>
+                        </div>
+                    @endforeach
+                @else
+                    <h2 class="text-center" style="color: rgba(255, 255, 255, 0.71);">There is no event for the moment. Stay tuned!</h2>
+                @endif
             </div>
     </div>
 

@@ -104,9 +104,9 @@
                         <div class="input-div">
                             <select id="reservation_option_select" name="reservation_option_id" class="form-control col-md-4 col-form-label ml-3" required>
                                 <option value="" disabled selected>Select your option</option>
-                                @foreach($event->reservation_options as $reservation_option)
-                                    <option id="reservation_option_option" value="{{$reservation_option->id}}">{{$reservation_option->description}} - {{$reservation_option->price}} </option>
-                                @endforeach
+                                @for($i=0;$i<count($event->reservation_options);$i++)
+                                    <option id="reservation_option_option" value="{{$event->reservation_options[$i]->id}}">{{$event->reservation_options[$i]->description}} - {{$event->reservation_options[$i]->price}} {{ $capacities_formatted[$i] }}</option>
+                                @endfor
                             </select>
                         </div>
                     </div>
