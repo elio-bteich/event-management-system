@@ -22,8 +22,6 @@ Route::get('/reservation', 'ReservationsController@index')->name('reservation.in
 Route::post('/reservation', 'ReservationsController@store')->middleware(['auth', 'verified'])->name('reservation.store');
 Route::get('/reservation/event/{event}', 'ReservationsController@create')->middleware(['auth', 'verified'])->name('reservation.create');
 
-Route::get('/reservation/sendEmailVerification/{email}', 'ReservationsController@send_email_verification');
-
 Route::get('/events', 'EventsController@index')->name('event.index');
 Route::get('/events/create', 'EventsController@create')->name('event.create');
 Route::post('/events/create', 'EventsController@store')->name('event.store');
@@ -36,14 +34,11 @@ Route::delete('/events/{event}', 'EventsController@destroy')->name('event.destro
 Route::get('/events/{event}/requests', 'EventsController@get_requests');
 Route::get('/events/{event}/reservations', 'EventsController@get_reservations');
 
-Route::post('/events/{event}/request/{reservation}/accept', 'ReservationsController@accept_reservation_request');
-Route::post('/events/{event}/request/{reservation}/decline', 'ReservationsController@decline_reservation_request');
+Route::post('/request/{reservation}/accept', 'ReservationsController@accept_reservation_request');
+Route::post('/request/{reservation}/decline', 'ReservationsController@decline_reservation_request');
 
 
 Auth::routes(['verify' => true]);
 
-/**
-Route::get('/email/verify', function () {
-    return view('auth.verify-email');
-})->middleware('auth')->name('verification.notice');
-*/
+Route::get('/admin/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
+Route::post('/admin/post', 'Auth\AdminLoginController@login')->name('admin.login');

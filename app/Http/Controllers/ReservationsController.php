@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreReservationRequest;
-use App\Mail\AuthenticationEmail;
+use App\Mail\ReservationRequestDeclined;
 use App\Models\Event;
 use App\Models\Reservation;
 use App\Models\ReservationOption;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
-use PhpParser\Node\Expr\Array_;
 
 class ReservationsController extends Controller
 {
@@ -43,15 +41,17 @@ class ReservationsController extends Controller
         return back()->with('success', 'reservation request has been sent');
     }
 
-    public function accept_reservation_request(Event $event, Reservation $reservation) {
+    public function accept_reservation_request(Reservation $reservation) {
         $reservation->acceptance_status_id = 3;
         $reservation->save();
         return response()->json(['acceptance_status_update' => 'reservation request has been accepted successfully']);
     }
 
-    public function decline_reservation_request(Event $event, Reservation $reservation) {
+    public function decline_reservation_request(Reservation $reservation) {
         $reservation->acceptance_status_id = 1;
         $reservation->save();
+        // TODO: send a mail to the reservation->user->email_address telling him that his request has been declined
+        Mail::to($reservation->user->email)->send(new ReservationRequestDeclined($reservation->event));
         return response()->json(['acceptance_status_update' => 'reservation request has been declined']);
     }
 }

@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\File;
 
 class EventsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
+
     public function index()
     {
         $events = Event::latest()->get();
@@ -24,7 +29,12 @@ class EventsController extends Controller
     {
         //dd(phpinfo());
         $event = new Event;
-        $event->description = $request->input('description');
+        $event->description = $request->description;
+        $event->location = $request->location;
+        $event->date = $request->date;
+        $event->start_time = $request->start_time;
+        $event->end_time = $request->end_time;
+        $event->active = $request->active;
         if ($request->hasFile('flyer_image')) {
             $file = $request->file('flyer_image');
             $extension = $file->getClientOriginalExtension();
@@ -50,7 +60,12 @@ class EventsController extends Controller
     public function update(Event $event, Request $request)
     {
         // TODO: input validations
-        $event->description = $request['description'];
+        $event->description = $request->description;
+        $event->location = $request->location;
+        $event->date = $request->date;
+        $event->start_time = $request->start_time;
+        $event->end_time = $request->end_time;
+        $event->active = $request->active;
         if ($request->hasFile('flyer_image')) {
             $file = $request->file('flyer_image');
             $extension = $file->getClientOriginalExtension();
@@ -112,7 +127,8 @@ class EventsController extends Controller
         return view('events.edit', compact('event'));
     }
 
-    public function destroy(Event $event) {
+    public function destroy(Event $event)
+    {
         $event->reservations()->delete();
         $event->reservation_options()->delete();
         $this->removeImage('event_flyers/'.$event->flyer_image);

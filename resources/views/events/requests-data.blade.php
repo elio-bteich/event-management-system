@@ -20,7 +20,7 @@
                             <td width="30%">{{ $request->user->email }}</td>
                             <td width="10%">{{ $request->reservation_option->description }}</td>
                             <td style="white-space: nowrap" width="20%">
-                                <form action="/events/{{$request->event_id}}/request/{{$request->id}}" method="POST" onsubmit="event.preventDefault();">
+                                <form action="/request/{{$request->id}}" method="POST" onsubmit="event.preventDefault();">
                                     @csrf
                                     <input type="submit" name="action" class="btn btn-primary" value="Accept">
                                     <input type="submit" name="action" class="btn btn-danger" value="Decline">

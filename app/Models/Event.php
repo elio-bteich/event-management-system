@@ -11,7 +11,12 @@ class Event extends Model
 
     protected $fillable = [
         'description',
-        'flyer_image'
+        'flyer_image',
+        'location',
+        'date',
+        'start_time',
+        'end_time',
+        'active'
     ];
 
     public function reservations() {

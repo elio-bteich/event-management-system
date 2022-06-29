@@ -70,7 +70,7 @@
         .customed-alert {
             width: 60%;
             position: absolute;
-            top: 8%;
+            top: 10%;
             left: 50%;
             transform: translate(-50%, -50%);
         }

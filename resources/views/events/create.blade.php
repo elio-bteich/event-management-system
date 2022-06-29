@@ -21,6 +21,26 @@
                                 <label for="description">Description</label>
                                 <input type="text" id="description" name="description" class="form-control" required>
                             </div>
+                            <div class="form-group mb-3">
+                                <label for="location">Location</label>
+                                <input type="text" id="location" name="location" class="form-control" required>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="date">Date</label>
+                                <input type="date" id="date" name="date" placeholder="dd-mm-yyyy" class="form-control" required>
+                            </div>
+                            <div class="form-group mb-3">
+                                <div class="row mb-3" style="--bs-gutter-x: 0; margin: 0;">
+                                    <div class="col-6" style="padding-right: 20px;">
+                                        <label for="start_time">Start Time</label>
+                                        <input type="time" id="start_time" name="start_time" class="form-control" required>
+                                    </div>
+                                    <div class="col-6" style="padding-left: 20px;">
+                                        <label for="end_time">End Time</label>
+                                        <input type="time" id="end_time" name="end_time" class="form-control" required>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-group mb-3" id="options-container">
                                 <label for="flyer">Options</label>
                                 <div class="row mb-3" style="--bs-gutter-x: 0; margin: 0;">
@@ -49,6 +69,10 @@
                             <div class="form-group mb-3">
                                 <label for="flyer">Flyer</label>
                                 <input type="file" id="flyer" name="flyer_image" class="form-control">
+                            </div>
+                            <div class="my-5">
+                                <label class="radio-inline"><input type="radio" name="active" value="1" checked>Active</label>
+                                <label class="radio-inline"><input type="radio" name="active" value="0">Passive</label>
                             </div>
                             <div class="form-group mb-3">
                                 <button type="submit" class="btn btn-primary">Add</button>

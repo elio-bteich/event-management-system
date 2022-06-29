@@ -22,6 +22,26 @@
                                 <label for="description">Description</label>
                                 <input type="text" id="description" name="description" class="form-control" value="{{$event->description}}" required>
                             </div>
+                            <div class="form-group mb-3">
+                                <label for="location">Location</label>
+                                <input type="text" id="location" name="location" class="form-control" value="{{ $event->location }}" required>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="date">Date</label>
+                                <input type="date" id="date" name="date" class="form-control" value="{{ $event->date }}" required>
+                            </div>
+                            <div class="form-group mb-3">
+                                <div class="row mb-3" style="--bs-gutter-x: 0; margin: 0;">
+                                    <div class="col-6" style="padding-right: 20px;">
+                                        <label for="start_time">Start Time</label>
+                                        <input type="time" id="start_time" name="start_time" value="{{ $event->start_time }}" class="form-control" required>
+                                    </div>
+                                    <div class="col-6" style="padding-left: 20px;">
+                                        <label for="end_time">End Time</label>
+                                        <input type="time" id="end_time" name="end_time" value="{{ $event->end_time }}" class="form-control" required>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-group mb-3" id="options-container">
                                 <label for="flyer">Options</label>
                                 @foreach($event->reservation_options as $reservation_option)
@@ -50,6 +70,10 @@
                             <div class="form-group mb-3">
                                 <label for="flyer">Flyer</label>
                                 <input type="file" id="flyer" name="flyer_image" class="form-control" value="{{$event->flyer_image}}">
+                            </div>
+                            <div class="my-5">
+                                <label class="radio-inline"><input type="radio" name="active" value="1" {{ $event->active==1 ? 'checked' : '' }}>Active</label>
+                                <label class="radio-inline"><input type="radio" name="active" value="0" {{ $event->active==0 ? 'checked' : '' }}>Passive</label>
                             </div>
                             <div class="form-group mb-3">
                                 <button type="submit" class="btn btn-primary">Save</button>

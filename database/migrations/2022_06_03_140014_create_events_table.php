@@ -17,6 +17,11 @@ class CreateEventsTable extends Migration
             $table->id();
             $table->string('description');
             $table->string('flyer_image');
+            $table->string('location');
+            $table->date('date');
+            $table->time('start_time');
+            $table->time('end_time');
+            $table->integer('active');
             $table->timestamps();
         });
     }
