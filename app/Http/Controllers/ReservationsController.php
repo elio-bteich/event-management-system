@@ -51,7 +51,7 @@ class ReservationsController extends Controller
         $reservation->acceptance_status_id = 1;
         $reservation->save();
         // TODO: send a mail to the reservation->user->email_address telling him that his request has been declined
-        Mail::to($reservation->user->email)->send(new ReservationRequestDeclined($reservation->event));
+        Mail::to($reservation->user->email)->send(new ReservationRequestDeclined($reservation));
         return response()->json(['acceptance_status_update' => 'reservation request has been declined']);
     }
 }

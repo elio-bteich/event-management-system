@@ -37,8 +37,8 @@ Route::get('/events/{event}/reservations', 'EventsController@get_reservations');
 Route::post('/request/{reservation}/accept', 'ReservationsController@accept_reservation_request');
 Route::post('/request/{reservation}/decline', 'ReservationsController@decline_reservation_request');
 
-
 Auth::routes(['verify' => true]);
 
-Route::get('/admin/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
-Route::post('/admin/post', 'Auth\AdminLoginController@login')->name('admin.login');
+Route::get('/admin', 'AdminController@index')->name('admin.index');
+
+
