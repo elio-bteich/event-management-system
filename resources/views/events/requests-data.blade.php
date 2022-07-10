@@ -22,8 +22,12 @@
                             <td style="white-space: nowrap" width="20%">
                                 <form action="/request/{{$request->id}}" method="POST" onsubmit="event.preventDefault();">
                                     @csrf
-                                    <input type="submit" name="action" class="btn btn-primary" value="Accept">
-                                    <input type="submit" name="action" class="btn btn-danger" value="Decline">
+                                    @can('accept reservations')
+                                        <input type="submit" name="action" class="btn btn-primary" value="Accept">
+                                    @endcan
+                                    @can('decline reservations')
+                                        <input type="submit" name="action" class="btn btn-danger" value="Decline">
+                                    @endcan
                                 </form>
                             </td>
                         </tr>
