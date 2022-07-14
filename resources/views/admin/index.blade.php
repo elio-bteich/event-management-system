@@ -7,7 +7,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Admin Dashboard <a href="{{ route('admin.add-admin') }}" class="btn btn-primary float-end">Add Admin</a></h4>
+                        <h4>Admins <a href="{{ route('admin.manage-users') }}" class="btn btn-primary float-end">Manage Users</a></h4>
                     </div>
                     <div class="card-body">
                         <table class="w-100">
@@ -18,10 +18,10 @@
                                     <td width="25%" style="padding-bottom: 10px">{{ $admin->lname }}</td>
                                     <td width="25%" style="padding-bottom: 10px">{{ $admin->email }}</td>
                                     <td width="25%" style="padding-bottom: 10px; text-align: center">
-                                        <form style="display: inline" action="{{ route('admin.demote', ['user'=>$admin->id]) }}" method="post">
-                                            @method('patch')
+                                        <form action="/admin/demote/{{$admin->id}}" method="POST" onsubmit="event.preventDefault();">
                                             @csrf
-                                            <input class="btn btn-danger" type="submit" value="Demote">
+                                            <input type="hidden" name="user_id" value="{{ $admin->id }}">
+                                            <input type="submit" name="action" class="btn btn-danger demote-btn" value="Demote">
                                         </form>
                                     </td>
                                 </tr>
@@ -34,4 +34,15 @@
         </div>
     </div>
 
+    <script>
+        $(document).on('click', '.demote-btn', function (e){
+            $.ajax({
+                url: $(e.target).parent('form').attr('action'),
+                type: 'GET',
+                success: function (data) {
+                    $($(e.target).parents('tr')[0]).remove()
+                }
+            })
+        })
+    </script>
 @endsection
