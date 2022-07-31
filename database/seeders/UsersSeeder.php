@@ -19,7 +19,7 @@ class UsersSeeder extends Seeder
         $user->fname = 'Elio';
         $user->lname = 'Bteich';
         $user->email = 'eliobteich115@gmail.com';
-        $user->email_verified_at = true;
+        $user->email_verified_at = date('y/m/d H:i:s', time());
         $user->password = Hash::make('lalipos12');
         $user->remember_token = null;
         $user->save();
@@ -29,7 +29,7 @@ class UsersSeeder extends Seeder
         $user->fname = 'Joe';
         $user->lname = 'Mawad';
         $user->email = 'joemawad@gmail.com';
-        $user->email_verified_at = true;
+        $user->email_verified_at = date('y/m/d H:i:s', time());
         $user->password = Hash::make('newpassword');
         $user->remember_token = null;
         $user->save();
@@ -39,7 +39,7 @@ class UsersSeeder extends Seeder
         $user->fname = 'Events';
         $user->lname = 'Reader';
         $user->email = 'eventsreader@gmail.com';
-        $user->email_verified_at = null;
+        $user->email_verified_at = date('y/m/d H:i:s', time());
         $user->password = Hash::make('newpassword');
         $user->remember_token = null;
         $user->save();
@@ -49,7 +49,7 @@ class UsersSeeder extends Seeder
         $user->fname = 'Events';
         $user->lname = 'Creator';
         $user->email = 'eventscreator@gmail.com';
-        $user->email_verified_at = null;
+        $user->email_verified_at = date('y/m/d H:i:s', time());
         $user->password = Hash::make('newpassword');
         $user->remember_token = null;
         $user->save();
@@ -59,7 +59,7 @@ class UsersSeeder extends Seeder
         $user->fname = 'Events';
         $user->lname = 'Editor';
         $user->email = 'eventseditor@gmail.com';
-        $user->email_verified_at = null;
+        $user->email_verified_at = date('y/m/d H:i:s', time());
         $user->password = Hash::make('newpassword');
         $user->remember_token = null;
         $user->save();
@@ -69,7 +69,7 @@ class UsersSeeder extends Seeder
         $user->fname = 'Events';
         $user->lname = 'Deleter';
         $user->email = 'eventsdeleter@gmail.com';
-        $user->email_verified_at = null;
+        $user->email_verified_at = date('y/m/d H:i:s', time());
         $user->password = Hash::make('newpassword');
         $user->remember_token = null;
         $user->save();
@@ -79,7 +79,7 @@ class UsersSeeder extends Seeder
         $user->fname = 'Reservations';
         $user->lname = 'Acceptor';
         $user->email = 'reservationsacceptor@gmail.com';
-        $user->email_verified_at = null;
+        $user->email_verified_at = date('y/m/d H:i:s', time());
         $user->password = Hash::make('newpassword');
         $user->remember_token = null;
         $user->save();
@@ -89,7 +89,7 @@ class UsersSeeder extends Seeder
         $user->fname = 'Reservations';
         $user->lname = 'Decliner';
         $user->email = 'reservationsdecliner@gmail.com';
-        $user->email_verified_at = null;
+        $user->email_verified_at = date('y/m/d H:i:s', time());
         $user->password = Hash::make('newpassword');
         $user->remember_token = null;
         $user->save();
