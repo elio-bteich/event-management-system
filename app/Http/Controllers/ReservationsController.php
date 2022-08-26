@@ -44,13 +44,13 @@ class ReservationsController extends Controller
     public function accept_reservation_request(Reservation $reservation) {
         $reservation->acceptance_status_id = 3;
         $reservation->save();
+        // TODO: send an email to the reservation's email address with the ticket attached.
         return response()->json(['acceptance_status_update' => 'reservation request has been accepted successfully']);
     }
 
     public function decline_reservation_request(Reservation $reservation) {
         $reservation->acceptance_status_id = 1;
         $reservation->save();
-        // TODO: send a mail to the reservation->user->email_address telling him that his request has been declined
         Mail::to($reservation->user->email)->send(new ReservationRequestDeclined($reservation));
         return response()->json(['acceptance_status_update' => 'reservation request has been declined']);
     }
