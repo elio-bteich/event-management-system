@@ -46,10 +46,6 @@ class ReservationsController extends Controller
     public function accept_reservation_request(Reservation $reservation) {
         $reservation->acceptance_status_id = 3;
         $reservation->save();
-        // TODO: send an email to the reservation's email address with the ticket attached.
-        $data["email"]=$reservation->user->email;
-        $data["client_name"]=$reservation->user->fname . ' ' . $reservation->user->lname;
-        $data["subject"]='Ticket ' . $reservation->event->description;
  
         $pdf = PDF::loadView('test', []);
         Mail::to($reservation->user->email)->send(new ReservationRequestAccepted($reservation, $data['subject'], $pdf->output()));
