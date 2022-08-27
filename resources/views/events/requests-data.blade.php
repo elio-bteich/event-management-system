@@ -48,6 +48,7 @@
             url: $($(this)[0].parentElement).attr('action') + '/accept',
             method: 'POST',
             success: function (data) {
+                console.log(data)
                 $($(e.target).closest('tr')[0]).remove()
                 increaseReservationsCount()
                 decreaseRequestsCount()

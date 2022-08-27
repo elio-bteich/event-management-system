@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ReservationRequestAccepted;
 use App\Mail\ReservationRequestDeclined;
 use App\Models\Event;
 use App\Models\Reservation;
@@ -9,6 +10,7 @@ use App\Models\ReservationOption;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use PDF;
 
 class ReservationsController extends Controller
 {
@@ -45,6 +47,13 @@ class ReservationsController extends Controller
         $reservation->acceptance_status_id = 3;
         $reservation->save();
         // TODO: send an email to the reservation's email address with the ticket attached.
+        $data["email"]=$reservation->user->email;
+        $data["client_name"]=$reservation->user->fname . ' ' . $reservation->user->lname;
+        $data["subject"]='Ticket ' . $reservation->event->description;
+ 
+        $pdf = PDF::loadView('test', []);
+        Mail::to($reservation->user->email)->send(new ReservationRequestAccepted($reservation, $data['subject'], $pdf->output()));
+        
         return response()->json(['acceptance_status_update' => 'reservation request has been accepted successfully']);
     }
 
