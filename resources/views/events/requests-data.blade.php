@@ -41,32 +41,27 @@
 </table>
 <script>
     $('input[value=Accept]').on('click', function(e) {
+        $($(e.target).closest('tr')[0]).remove()
+        increaseReservationsCount()
+        decreaseRequestsCount()
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             url: $($(this)[0].parentElement).attr('action') + '/accept',
-            method: 'POST',
-            success: function (data) {
-                console.log(data)
-                $($(e.target).closest('tr')[0]).remove()
-                increaseReservationsCount()
-                decreaseRequestsCount()
-            }
+            method: 'POST'
         })
     })
 
     $('input[value=Decline]').on('click', function(e) {
+        $($(e.target).closest('tr')[0]).remove()
+        decreaseRequestsCount()
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             url: $($(this)[0].parentElement).attr('action') + '/decline',
-            method: 'POST',
-            success: function (data) {
-                $($(e.target).closest('tr')[0]).remove()
-                decreaseRequestsCount()
-            }
+            method: 'POST'
         })
     })
 

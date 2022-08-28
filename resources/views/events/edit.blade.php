@@ -32,13 +32,9 @@
                             </div>
                             <div class="form-group mb-3">
                                 <div class="row mb-3" style="--bs-gutter-x: 0; margin: 0;">
-                                    <div class="col-6" style="padding-right: 20px;">
+                                    <div class="col-12" style="padding-right: 20px;">
                                         <label for="start_time">Start Time</label>
                                         <input type="time" id="start_time" name="start_time" value="{{ $event->start_time }}" class="form-control" required>
-                                    </div>
-                                    <div class="col-6" style="padding-left: 20px;">
-                                        <label for="end_time">End Time</label>
-                                        <input type="time" id="end_time" name="end_time" value="{{ $event->end_time }}" class="form-control" required>
                                     </div>
                                 </div>
                             </div>

@@ -11,7 +11,8 @@ class Reservation extends Model
 
     protected $fillable = [
         'reservation_option_id',
-        'event_id'
+        'event_id',
+        'ticket_code'
     ];
 
     public function event() {

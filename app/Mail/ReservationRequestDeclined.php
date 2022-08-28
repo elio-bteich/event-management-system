@@ -17,10 +17,12 @@ class ReservationRequestDeclined extends Mailable
      * @return void
      */
     public $reservation;
+    public $subject;
 
-    public function __construct($reservation)
+    public function __construct($reservation, $subject)
     {
         $this->reservation = $reservation;
+        $this->subject = $subject;
     }
 
     /**
@@ -30,6 +32,6 @@ class ReservationRequestDeclined extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.reservation-request-declined')->with('reservation');
+        return $this->subject($this->subject)->markdown('emails.reservation-request-declined')->with('reservation');
     }
 }

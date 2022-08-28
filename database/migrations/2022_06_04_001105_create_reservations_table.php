@@ -19,6 +19,7 @@ class CreateReservationsTable extends Migration
             $table->foreignId('event_id')->references('id')->on('events');
             $table->foreignId('acceptance_status_id')->default(2)->references('id')->on('acceptance_statuses');
             $table->foreignId('reservation_option_id')->references('id')->on('reservation_options');
+            $table->string('ticket_code')->nullable();
             $table->timestamps();
         });
     }
