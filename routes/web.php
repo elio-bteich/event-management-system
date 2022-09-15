@@ -44,3 +44,5 @@ Route::patch('/admin/{user}', 'SuperAdminController@demote')->name('admin.demote
 Route::get('/admin/fetch_users/{user_fname}/{user_lname}/{user_email}', 'SuperAdminController@fetch_users')->middleware('role:super-admin');
 Route::get('/admin/promote/{user}', 'SuperAdminController@promote_user')->middleware('role:super-admin');
 Route::get('/admin/demote/{user}', 'SuperAdminController@demote_user')->middleware('role:super-admin');
+
+Route::get('/phpinfo', fn() => phpinfo());

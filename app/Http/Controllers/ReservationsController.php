@@ -62,7 +62,19 @@ class ReservationsController extends Controller
         $reservation->save();
 
         $subject = 'Reservation request accepted';
-        $pdf = PDF::loadView('pdf.ticket', compact('reservation'));
+        $opciones_ssl=array(
+            "ssl"=>array(
+            "verify_peer"=>false,
+            "verify_peer_name"=>false,
+            ),
+        );
+        $img_path = public_path('/uploads/event_flyers/'. $reservation->event->flyer_image);
+        $extention = pathinfo($img_path, PATHINFO_EXTENSION);
+        $data = file_get_contents($img_path, false, stream_context_create($opciones_ssl));
+        $img_base_64 = base64_encode($data);
+        $path_event_flyer = 'data:image/' . $extention . ';base64,' . $img_base_64;
+        
+        $pdf = PDF::loadView('pdf.ticket', compact('reservation', 'path_event_flyer'));
         Mail::to($reservation->user->email)->send(new ReservationRequestAccepted($reservation, $subject, $pdf->output()));
         return response()->json(['acceptance_status_update' => 'reservation request has been accepted successfully']);
     }

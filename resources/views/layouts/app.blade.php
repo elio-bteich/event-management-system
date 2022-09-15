@@ -86,6 +86,9 @@
     #navbar .dropdown-toggle:hover {
         text-decoration: none;
     }
+    a:hover {
+        text-decoration: none;
+    }
 </style>
 
 <body>
@@ -98,6 +101,11 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div id="right-navbar" class="navbar-nav navbar-right">
+                    @can('read events')
+                        <li>
+                            <a href="/events" style="font-size: 20px; padding-right: 20px">Management</a>
+                        </li>
+                    @endcan
                     @auth
                         <li class="dropdown" style="padding: 0">
                             <a style="font-size: 20px" id="navbarDropdown" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

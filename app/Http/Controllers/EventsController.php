@@ -33,7 +33,6 @@ class EventsController extends Controller
         $event->location = $request->location;
         $event->date = $request->date;
         $event->start_time = $request->start_time;
-        $event->end_time = $request->end_time;
         $event->active = $request->active;
         if ($request->hasFile('flyer_image')) {
             $file = $request->file('flyer_image');
@@ -64,7 +63,6 @@ class EventsController extends Controller
         $event->location = $request->location;
         $event->date = $request->date;
         $event->start_time = $request->start_time;
-        $event->end_time = $request->end_time;
         $event->active = $request->active;
         if ($request->hasFile('flyer_image')) {
             $file = $request->file('flyer_image');
