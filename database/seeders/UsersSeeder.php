@@ -16,19 +16,19 @@ class UsersSeeder extends Seeder
     public function run()
     {
         $user = new User;
-        $user->fname = 'Elio';
-        $user->lname = 'Bteich';
-        $user->email = 'eliobteich115@gmail.com';
+        $user->fname = 'Normal';
+        $user->lname = 'Admin';
+        $user->email = 'admin@gmail.com';
         $user->email_verified_at = date('y/m/d H:i:s', time());
-        $user->password = Hash::make('lalipos12');
+        $user->password = Hash::make('newpassword');
         $user->remember_token = null;
         $user->save();
         $user->assignRole('admin');
 
         $user = new User;
-        $user->fname = 'Joe';
-        $user->lname = 'Mawad';
-        $user->email = 'joemawad@gmail.com';
+        $user->fname = 'Super';
+        $user->lname = 'Admin';
+        $user->email = 'superadmin@gmail.com';
         $user->email_verified_at = date('y/m/d H:i:s', time());
         $user->password = Hash::make('newpassword');
         $user->remember_token = null;
