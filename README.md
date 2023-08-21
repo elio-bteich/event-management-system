@@ -16,7 +16,7 @@ The goal of this project was to create a web application that simplifies event m
 
 - **QR Code Generation**: A feature was planned to generate QR codes for the reserved tickets, allowing for easy event check-in.
 
-- **Roles and Permissions Management**: The project utilizes the [Spatie Laravel-Permissions](https://spatie.be/docs/laravel-permission/v5/introduction) package to manage user roles and permissions. Roles such as "User" and "Admin" were intended to be implemented, allowing different levels of access within the application.
+- **Roles and Permissions Management**: The project utilizes the [Spatie Laravel-Permissions](https://spatie.be/docs/laravel-permission/v5/introduction) package to manage user roles and permissions. Roles such as "Super Admin", "Admin" and many more roles related to the event management were implemented, allowing different levels of access within the application, you can check the implemented roles in the database/seeders/RoleSeeder.php and the implemented permissions in the database/seeders/PermissionSeeder.php
 
 
 ## Project Dependencies
